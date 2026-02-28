@@ -75,43 +75,111 @@
   /* Optional: flex to center content */
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.tan-card {
-  width: 100%;                      /* slightly smaller than phone width */
-  height: 756px;                   /* shorter than phone height */
-  background: linear-gradient(to top, #FEF9E7, #FFFFFF); /* tan → white */
-  border-top-left-radius: 30px;    /* rounded top corners */
-  border-top-right-radius: 30px;
-  border-bottom-left-radius: 0;    /* flat bottom */
-  border-bottom-right-radius: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* subtle shadow like shadow-sm */
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   
 }
 
-.nav {
-  font-size: 20px;
-  padding: 20px;
-  font-family: 'DM Sans', sans-serif;
-  color: #3E4D22 !important;
-  font-weight: bold !important;
+.tan-card {
+  width: 100%;
+  height: 756px;
+  background: linear-gradient(to top, #FEF9E7, #FFFFFF);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* allow children to use full width */
+  padding: 30px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;  /* crucial */
 }
 
 .gallery-title {
   font-size: 30px;
-  padding: 30px;
   font-family: 'DM Sans', sans-serif;
-  color: #3E4D22 !important;
-  font-weight: bold !important;
+  color: #3E4D22;
+  font-weight: bold;
 }
 
-.parent-shelf {
+.add_plant {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #FEF9E7;
+  background-color: #E3756B;
+  border-radius: 50px;
+  border: 2px solid #E3756B;
+  padding: 5px 15px;  /* make the button bigger */
+}
+
+.add_plant:hover {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  background-color: transparent;
+  color: #E3756B;
+  border: 2px solid #E3756B;
+  border-radius: 50px;
+  padding: 5px 15px;  /* make the button bigger */
+}
+
+.nav_text a { 
+  font-size: 18px; 
+  font-family: 'DM Sans', sans-serif; 
+  font-weight: bold;
+  color: #3E4D22 !important;
+  padding-left: 10px;
+}
+
+.parent_shelf {
+  display: flex;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 15px;
+  align-items: left;
+  padding-left: 20px;
+}
+
+.plant-section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 20px;
+}
+
+/* plants side-by-side */
+.plants-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: -6px;  /* pulls plants closer to shelf */
+}
+
+.plant_text a {
+  font-size: 20px; 
+  font-family: 'Gamja Flower', sans-serif; 
+  font-weight: bold;
+  color: #3E4D22 !important;
+}
+
+.plant_scroll {
+  flex: 1;
+  width: 100%;
+
+  overflow-y: auto;
+  min-height: 0;   /* ⭐ VERY IMPORTANT */
+  padding-bottom: 60px;
+}
+
+.plant-scroll::-webkit-scrollbar {
+  display: none;
 }
