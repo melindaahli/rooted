@@ -3,6 +3,8 @@ import ProgressCard from "../components/ProgressCard.tsx"
 import Button from 'react-bootstrap/Button';
 import { useNavigate } from 'react-router-dom';
 
+import humidity from "../assets/humidity.svg";
+ 
 function SinglePlantView() {
     const navigate = useNavigate();
 
@@ -17,11 +19,11 @@ function SinglePlantView() {
     function renderSegmentView() {
         if (segmentViewId === 1) {
             return (
-                <>
-                    <ProgressCard />
-                    <ProgressCard />
-                    <ProgressCard />
-                </>
+                <div className="flex flex-col gap-4 justify-around">
+                    <ProgressCard category="Temperature" srcIcon={humidity} currentVal="74" maxVal="80" />
+                    <ProgressCard category="Humidity Level" iconSrc="/../assests/humidity.svg" currentVal="83" maxVal="100" />
+                    <ProgressCard category="Light Level" iconSrc="/../assests/light.svg" currentVal="70" maxVal="100" />
+                </div>
             );
         } else if (segmentViewId === 2) {
             return <>recommended tasks</>;
@@ -31,7 +33,7 @@ function SinglePlantView() {
     }
 
     return (
-    <div className="flex flex-col justify-between h-screen">
+    <div className="flex flex-col justify-between">
         <Button onClick={() => { navigate("/dashboard")}}>back</Button>
         <div>plant shelf component</div>
 
