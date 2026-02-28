@@ -1,4 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Gamja+Flower&display=swap');
 @import "tailwindcss";
+
 
 #root {
   max-width: 1280px;
@@ -53,9 +55,9 @@
 
 .blue_background {
   /* Size */
-  width: 380px;       /* typical phone width */
+  width: 354px;       /* typical phone width */
   max-width: 90vw;    /* responsive on smaller screens */
-  height: 956px;      /* phone height */
+  height: 770px;      /* phone height */
   max-height: 90vh;   /* responsive on taller screens */
 
   /* Gradient background */
@@ -66,7 +68,6 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 
   /* Center horizontally */
-  margin: 20px auto;
 
   /* Keep content inside */
   overflow: hidden;
@@ -75,5 +76,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+
+.tan-card {
+  width: 100%;                      /* slightly smaller than phone width */
+  height: 756px;                   /* shorter than phone height */
+  background: linear-gradient(to top, #FEF9E7, #FFFFFF); /* tan → white */
+  border-top-left-radius: 30px;    /* rounded top corners */
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 0;    /* flat bottom */
+  border-bottom-right-radius: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* subtle shadow like shadow-sm */
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
+
+.nav {
+  font-size: 20px;
+  padding: 20px;
+  font-family: 'DM Sans', sans-serif;
+  color: #3E4D22 !important;
+  font-weight: bold !important;
+}
+
+.gallery-title {
+  font-size: 30px;
+  padding: 30px;
+  font-family: 'DM Sans', sans-serif;
+  color: #3E4D22 !important;
+  font-weight: bold !important;
+}
+
+.parent-shelf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
