@@ -48,4 +48,32 @@
   flex-direction: column;
   max-width: 440px;
   margin: 0 auto;
+  width: 90%;
+}
+
+.blue_background {
+  /* Size */
+  width: 380px;       /* typical phone width */
+  max-width: 90vw;    /* responsive on smaller screens */
+  height: 956px;      /* phone height */
+  max-height: 90vh;   /* responsive on taller screens */
+
+  /* Gradient background */
+  background: linear-gradient(to bottom, #E2F5FB, #CEEDF8);
+
+  /* Rounded corners and shadow */
+  border-radius: 30px;       /* rounded like a phone */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+  /* Center horizontally */
+  margin: 20px auto;
+
+  /* Keep content inside */
+  overflow: hidden;
+
+  /* Optional: flex to center content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
