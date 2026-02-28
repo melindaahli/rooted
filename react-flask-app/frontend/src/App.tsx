@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+import DashboardView from './pages/DashboardView';
+import GalleryView from './pages/GalleryView';
+import SinglePlantView from './pages/SinglePlantView';
 
 function App() {
   const [data, setData] = useState({ name: '', message: '' });
@@ -13,12 +18,28 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>name is: |{data.name}|</h1>
-        <p>message is: |{data.message}|</p>
-      </header>
-    </div>
+    <BrowserRouter>
+
+      <div className="App">
+          {/* nav bar */}
+          <nav>
+            <Link to="/dashboard">Dashboard</Link> | {" "}
+            <Link to="/gallery">Gallery</Link> | {" "}
+            <Link to="/single-plant">Single Plant</Link> 
+          </nav>
+
+          <h1>name is: |{data.name}|</h1>
+          <p>message is: |{data.message}|</p>
+
+          {/* routes */}
+          <Routes>
+            <Route path="/dashboard" element={<DashboardView />} />
+            <Route path="/gallery" element={<GalleryView />} /> 
+            <Route path="/single-plant" element={<SinglePlantView />} />
+          </Routes>
+      </div>
+
+    </BrowserRouter>
   );
 }
 
