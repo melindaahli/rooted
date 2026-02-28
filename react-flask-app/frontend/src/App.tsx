@@ -6,6 +6,8 @@ import DashboardView from './pages/DashboardView';
 import GalleryView from './pages/GalleryView';
 import SinglePlantView from './pages/SinglePlantView';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   const [data, setData] = useState({ name: '', message: '' });
   var endpoint = '/api/data'
@@ -28,8 +30,8 @@ function App() {
             <Link to="/single-plant">Single Plant</Link> 
           </nav>
 
-          <h1>name is: |{data.name}|</h1>
-          <p>message is: |{data.message}|</p>
+          {/* <h1>name is: |{data.name}|</h1>
+          <p>message is: |{data.message}|</p> */}
 
           {/* routes */}
           <Routes>

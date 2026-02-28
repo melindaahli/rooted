@@ -2,21 +2,25 @@ import RightArrow from '../assets/arrow_right.svg';
 
 function DashboardView() {
     return (
-    <div className="container blue_background">
-        <div className="header h-[324px]">
-            <p className="text-[39px] text-left pt-[25px] pl-[15px]">welcome back, shart</p>
+    <div className="blue_background">
+        <div className="h-[324px]">
+            <p className="text-[25px] text-left pt-[25px] -pl-[30px]">welcome back, shart</p>
         </div>
-        <div className="card bg-base-100 shadow-sm flex bg-gradient-to-t from-[#FEF9E7] to-white rounded-t-3xl w-[440px] h-[632px]">
-            <div className="tan_card">
-                <header className="mx-auto flex items-center justify-between w-[350px] bg-black">
-                   <h2 className="text-left text-[20px]">My Garden</h2>
-                    <div className="card-actions">
-                        <img src={RightArrow} className=""/>
-                        {/* <button className="btn btn-circle push-right rounded-full h-30px w-30px">&gt;</button> */}
-                    </div>
-                </header>
-                
-            </div>
+        <div className="tan-card w-[440px] h-[632px]">
+            <header className="flex items-center justify-between w-full">
+                <h2 className="dashboard-title">My Garden</h2>
+                <img src={RightArrow} className=""/>
+            </header>
+            <section> {/* may turn into its own react component */}
+                <div className="plant-card" ></div>
+            </section>
+            <p className="dashboard-title self-start">Recommended Tasks</p>
+            <section className="flex items-center w-full">
+                <div className="recc-task-button">
+                    <p>task</p>
+                    
+                </div>
+            </section>
         </div>
     </div>
     );
