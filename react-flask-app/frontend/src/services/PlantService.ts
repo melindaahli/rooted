@@ -17,6 +17,9 @@ export async function fetchPlants(): Promise<PlantData[]> {
     {
       plantId: "1",
       name: "sharty bae",
+      plantType: "leafy",
+      favorite: true,
+
       temperature: 95,
       humidity: 40,
       moisture: 10,
@@ -30,6 +33,9 @@ export async function fetchPlants(): Promise<PlantData[]> {
     {
       plantId: "2",
       name: "hottie hottie",
+      plantType: "succulent",
+      favorite: false,
+
       temperature: 75,
       humidity: 80,
       moisture: 50,
@@ -43,6 +49,9 @@ export async function fetchPlants(): Promise<PlantData[]> {
     {
       plantId: "3",
       name: "Bartholomew",
+      plantType: "flower",
+      favorite: true,
+
       temperature: 75,
       humidity: 80,
       moisture: 50,
@@ -56,6 +65,9 @@ export async function fetchPlants(): Promise<PlantData[]> {
     {
       plantId: "4",
       name: "Airoma",
+      plantType: "leafy",
+      favorite: false,
+
       temperature: 75,
       humidity: 80,
       moisture: 50,
@@ -69,6 +81,9 @@ export async function fetchPlants(): Promise<PlantData[]> {
     {
       plantId: "5",
       name: "Sea Bass",
+      plantType: "succulent",
+      favorite: true,
+
       temperature: 75,
       humidity: 80,
       moisture: 50,

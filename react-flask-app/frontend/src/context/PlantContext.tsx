@@ -13,15 +13,6 @@ const PlantContext = createContext<PlantContextType | null>(null);
 export function PlantProvider({ children }: { children: React.ReactNode }) {
   const [plants, setPlants] = useState<PlantData[]>([]);
 
-  // useEffect(() => {
-  //   async function loadPlants() {
-  //     const plantData = await fetchPlants();
-  //     setPlants(plantData);
-  //   }
-
-  //   loadPlants();
-  // }, []);
-
   useEffect(() => {
     let isMounted = true;
 

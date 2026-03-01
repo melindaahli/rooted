@@ -3,6 +3,9 @@ import type { Task } from "../models/Task";
 interface PlantDataModel {
     plantId: string;
     name: string;
+    plantType: string;
+    favorite: boolean;
+
     temperature?: number;
     humidity?: number;
     moisture?: number;
@@ -17,6 +20,9 @@ interface PlantDataModel {
 export class PlantData {
     plantId: string;
     name: string;
+    plantType: string;
+    favorite: boolean;
+
     airTempF: number;
     humidity: number;
     soilMoisture: number;
@@ -32,15 +38,18 @@ export class PlantData {
     constructor(objectModel:PlantDataModel) {
         this.plantId = objectModel['plantId'] ?? "";
         this.name = objectModel['name'] ?? "";
+        this.plantType = objectModel['plantType'] ?? "leafy";
+        this.favorite = objectModel['favorite'] ?? false;
+
         this.airTempF = objectModel['temperature'] ?? 0;
         this.humidity = objectModel['humidity'] ?? 0;
         this.soilMoisture = objectModel['moisture'] ?? 0;
         this.lightLevel = objectModel['light'] ?? "No Light Data";
 
-        this.recAirTempF = objectModel['recTemperature'];
-        this.recHumidity = objectModel['recHumidity'];
-        this.recSoilMoisture = objectModel['recMoisture'];
-        this.recLightLevel = objectModel['recLight'];
+        this.recAirTempF = objectModel['recTemperature'] ?? 100;
+        this.recHumidity = objectModel['recHumidity'] ?? 100;
+        this.recSoilMoisture = objectModel['recMoisture'] ?? 100;
+        this.recLightLevel = objectModel['recLight'] ?? 100;
 
         this.tasks = this.generateTasks();
     }
