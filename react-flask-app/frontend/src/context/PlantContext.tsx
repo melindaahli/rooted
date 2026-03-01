@@ -38,3 +38,13 @@ export function usePlants() {
   }
   return context;
 }
+
+// export async function getName(plantId: string) {
+//     const plantData = await fetchPlants();
+//     for (let i: number = 0; i < plantData.length; i++){
+//         if (plantId === plantData[i].plantId){
+//             return plantData[i].name;
+//         }
+//     }
+//     return "Plant Plant";
+// }

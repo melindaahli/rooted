@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import humidity from "../assets/humidity.svg";
 import arrow from "../assets/nocircle_arrow.svg"
+import HealthScoreHeart from '../components/HealthScoreHeart.tsx';
  
 function SinglePlantView() {
     const navigate = useNavigate();
@@ -17,13 +18,39 @@ function SinglePlantView() {
     // 3: Gallery
     let [segmentViewId, setSegmentViewId] = useState<number>(1);
 
+    var currentTemp: number = 100;
+    var maxTemp: number = 80;
+
+    var currentHumidity: number = 83;
+    var maxHumidity: number = 100;
+
+    var currentLight: number = 70;
+    var maxLight: number = 100;
+
+    var currentMoisture: number = 70;
+    var maxMoisture: number = 100;
+
+    var healthScore = calculateScore();
+
+    function calculateScore() {
+        return ( getPartialScore(currentTemp, maxTemp) + getPartialScore(currentHumidity, maxHumidity) 
+                 + getPartialScore(currentLight, maxLight) + getPartialScore(currentMoisture, maxMoisture) ) / 4 * 100;
+    }
+
+    function getPartialScore(curr: number, max: number) {
+        var percentage = curr/max;
+        if (percentage > 1 || percentage < 0) return percentage % 1;
+        return percentage;
+    }
+
     function renderSegmentView() {
         if (segmentViewId === 1) {
             return (
                 <div className="flex flex-col gap-2 justify-around">
-                    <ProgressCard category="Temperature" srcIcon={humidity} currentVal="74" maxVal="80" />
-                    <ProgressCard category="Humidity Level" iconSrc="/../assests/humidity.svg" currentVal="83" maxVal="100" />
-                    <ProgressCard category="Light Level" iconSrc="/../assests/light.svg" currentVal="70" maxVal="100" />
+                    <ProgressCard category="Temperature" srcIcon={humidity} currentVal={currentTemp} maxVal={maxTemp} />
+                    <ProgressCard category="Humidity Level" iconSrc="/../assests/humidity.svg" currentVal={currentHumidity} maxVal={maxHumidity} />
+                    <ProgressCard category="Light Level" iconSrc="/../assests/light.svg" currentVal={currentLight} maxVal={maxLight} />
+                    <ProgressCard category="Moisture Level" iconSrc="/../assests/humidity.svg" currentVal={currentMoisture} maxVal={maxMoisture} />
                 </div>
             );
         } else if (segmentViewId === 2) {
@@ -49,7 +76,7 @@ function SinglePlantView() {
                 <p className="text-start mb-0">{speciesName}</p>
             </div>
             <div className="flex flex-col justify-center">
-                <img alt="progress heart" />
+                <HealthScoreHeart score={healthScore} />
             </div>
         </div>
         
