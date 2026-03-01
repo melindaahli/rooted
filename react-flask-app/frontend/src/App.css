@@ -339,6 +339,7 @@ p {
   justify-content: space-between;
   align-items: center;
   width: 100%;  /* crucial */
+  padding-bottom: 10px;
 }
 
 .gallery-title {
