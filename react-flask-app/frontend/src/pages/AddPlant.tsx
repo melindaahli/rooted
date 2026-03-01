@@ -10,10 +10,34 @@ function AddPlant() {
   const navigate = useNavigate();
 
   const handleAddPlant = () => {
-    console.log("Plant Name:", plantName);
-    console.log("Plant Species:", plantSpecies);
-    // Here you can send the data to your backend or update state
-  };
+  // Determine image based on the plantSpecies keyword
+  let selectedImage = "leafy"; // default
+
+  // normalize input for matching
+  const species = plantSpecies.toLowerCase().trim();
+
+  if (species.includes("flower")) {
+    selectedImage = "flower";
+  } else if (species.includes("succulent")) {
+    selectedImage = "succulent";
+  } else if (species.includes("leafy")) {
+    selectedImage = "leafy";
+  }
+
+  const newPlant = { name: plantName, image: selectedImage };
+
+  // Load existing plants from localStorage
+  const stored = JSON.parse(localStorage.getItem("plants") || "[]");
+
+  // Append new plant
+  const updatedPlants = [...stored, newPlant];
+
+  // Save back to localStorage
+  localStorage.setItem("plants", JSON.stringify(updatedPlants));
+
+  // Optional: navigate back to gallery
+  navigate("/gallery");
+};
 
   return (
     <div className="blue_background">

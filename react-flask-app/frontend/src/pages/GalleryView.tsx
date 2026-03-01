@@ -5,9 +5,24 @@ import leafy from "../assets/leafy.svg";
 import succulent from "../assets/succulent.svg";
 import GardenPlant from "../components/GalleryPlant.tsx";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+const plantImages: any = {
+    flower,
+    leafy,
+    succulent
+};
 
 function GalleryView() {
     const navigate = useNavigate();
+    const [plants, setPlants] = useState<any[]>([]);
+
+    useEffect(() => {
+    const stored =
+        JSON.parse(localStorage.getItem("plants") || "[]");
+
+        setPlants(stored);
+}, []);
 
     return (
      
@@ -39,8 +54,8 @@ function GalleryView() {
 
                 <div className="plant-section">
                     <div className="plants-row">
-                       <GardenPlant name="Bartholomew" plantImage={flower} />
-                        <GardenPlant name="Airoma" plantImage={leafy} />
+                        <GardenPlant name="Barthlomew" plantImage={flower} />
+                        <GardenPlant name="Airoma" plantImage={succulent} />
                     </div>
 
                     <img src={shelf} alt="shelf"className="shelf-img"/>
@@ -48,8 +63,24 @@ function GalleryView() {
 
                 <div className="plant-section">
                     <div className="plants-row">
-                        <GardenPlant name="Sea Bass" plantImage={succulent} />
-                        <GardenPlant name="Cheeto" plantImage={flower} />
+                        <GardenPlant name="Airoma" plantImage={succulent} />
+                        {plants.map((plant, index) => (
+                            <div
+                                key={index}
+                                onClick={() => {
+                                // Clear all plants from localStorage
+                                localStorage.removeItem("plants");
+
+                                // Reset gallery state to empty
+                                setPlants([]);
+                                }}
+                            >
+                                <GardenPlant
+                                name={plant.name}
+                                plantImage={plantImages[plant.image]}
+                                />
+                            </div>
+                            ))}
                     </div>
 
                     <img src={shelf} alt="shelf"className="shelf-img"/>
