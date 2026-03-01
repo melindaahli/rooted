@@ -34,7 +34,8 @@ export class PlantData {
             id: `${this.plantId}-water`,
             plantId: this.plantId,
             title: "moisture",
-            status: "pending"
+            status: "pending",
+            message: "Please water your plant!"
         });
         }
 
@@ -43,7 +44,8 @@ export class PlantData {
             id: `${this.plantId}-temperature`,
             plantId: this.plantId,
             title: "temperature",
-            status: "pending"
+            status: "pending",
+            message: "Please cool down your plant!"
         });
         }
 
@@ -52,7 +54,8 @@ export class PlantData {
             id: `${this.plantId}-humidity`,
             plantId: this.plantId,
             title: "humidity",
-            status: "pending"
+            status: "pending",
+            message: "Please humidify your plant!"
         });
         }
 
@@ -61,7 +64,8 @@ export class PlantData {
             id: `${this.plantId}-light`,
             plantId: this.plantId,
             title: "light",
-            status: "pending"
+            status: "pending",
+            message: "Please light up your plant's world!"
         });
         }
 

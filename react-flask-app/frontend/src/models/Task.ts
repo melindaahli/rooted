@@ -10,4 +10,5 @@ export interface Task {
     plantId: string;
     title: TaskType;
     status: TaskStatus;
+    message: string;
 }
