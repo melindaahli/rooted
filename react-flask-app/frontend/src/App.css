@@ -9,40 +9,12 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+p {
+  font-family: 'DM Sans', sans-serif;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.gamja-flower {
+  font-family: 'Gamja Flower', sans-serif;
 }
 
 .container {
@@ -62,6 +34,31 @@
 
   /* Gradient background */
   background: linear-gradient(to bottom, #E2F5FB, #CEEDF8);
+
+  /* Rounded corners and shadow */
+  border-radius: 30px;       /* rounded like a phone */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+  /* Center horizontally */
+
+  /* Keep content inside */
+  overflow: hidden;
+
+  /* Optional: flex to center content */
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.tan_background {
+  /* Size */
+  width: 354px;       /* typical phone width */
+  max-width: 90vw;    /* responsive on smaller screens */
+  height: 770px;      /* phone height */
+  max-height: 90vh;   /* responsive on taller screens */
+
+  /* Gradient background */
+  background: linear-gradient(to top, #FEF9E7, #FFFFFF);
 
   /* Rounded corners and shadow */
   border-radius: 30px;       /* rounded like a phone */
@@ -209,4 +206,11 @@
   justify-content: left;
   align-items: center;
   border-radius: 20px;
+}
+
+.scroll-container {
+  /* height: 300px;  */
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
 }

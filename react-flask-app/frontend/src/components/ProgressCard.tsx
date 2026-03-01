@@ -10,37 +10,40 @@ function ProgressCard(props: any) {
     const maxVal: number = props.maxVal;
 
     const plantHealthString: string = currentVal / maxVal > 0.8 ? "Good" : "Bad";
+    const barVariant: string = plantHealthString == "Good" ? "success" : "danger";
 
     function renderIcon() {
         if (category === "Temperature") {
-            return (<img src={Temperature} />);
+            return (<img src={Temperature} className="scale-50" />);
         } else if (category === "Humidity Level") {
-            return (<img src={Humidity} />);
+            return (<img src={Humidity} className="scale-50" />);
         } else if (category === "Light Level") {
-            return (<img src={Light} />);
+            return (<img src={Light} className="scale-50" />);
         } else {
             return (<img src={Temperature} />);
         }
     }
     
     return (
-    <div className="rounded-2xl grid grid-cols-5 gap-4 bg-green-200 ">
+    <div className="rounded-2xl grid grid-cols-5 bg-green-200 h-fit">
         <div className="col-start-1 col-end-2 flex flex-row justify-center py-3 px-2">
             {renderIcon()}
         </div>
         
         {/* main content*/}
-        <div className="col-start-2 col-end-6 py-2 pr-3 flex-col justify-center"> 
-            <div className="flex flex-row justify-between align-bottom">
-                <p className="text-base font-bold">{category}</p>
-                <p className="text-base font-bold">{plantHealthString}</p>
+        <div className="col-start-2 col-end-6 py-2 pr-3 flex-col justify-center h-25"> 
+            <div className="flex flex-row justify-between h-fit align-center">
+                <p className="text-base font-bold m-0">{category}</p>
+                <p className="text-sm font-bold m-0">{plantHealthString}</p>
             </div>
-            <div>
-                <ProgressBar now={currentVal}  min={0} max={maxVal} label={`${currentVal/maxVal * 100}%`} />
+            <div className="my-1">
+                <ProgressBar now={currentVal}  min={0} max={maxVal} 
+                            label={`${currentVal/maxVal * 100}%`} 
+                            variant={barVariant} />
             </div>
             <div className="flex flex-row justify-between">
-                <p className="text-sm">Current</p>
-                <p className="text-sm">Recommended</p>
+                <p className="text-xs mb-0">Current</p>
+                <p className="text-xs mb-0">Recommended</p>
             </div>
         </div>
     </div>
