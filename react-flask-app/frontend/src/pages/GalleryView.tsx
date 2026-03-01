@@ -1,6 +1,9 @@
 import shelf from "../assets/shelf.svg";
 import arrow from "../assets/nocircle_arrow.svg";
-import plant from "../assets/plant_placeholder.png";
+import flower from "../assets/flower.svg";
+import leafy from "../assets/leafy.svg";
+import succulent from "../assets/succulent.svg";
+import GardenPlant from "../components/GalleryPlant.tsx";
 import { useNavigate } from "react-router-dom";
 
 function GalleryView() {
@@ -28,14 +31,16 @@ function GalleryView() {
             <div className="plant_scroll">
                 <div className="plant-section">
                     <div className="plants-row">
-                        <div>
-                            <p className="plant_text">plant name</p>
-                            <img src={plant} alt="plant" />
-                        </div>
-                        <div>
-                            <p className="plant_text">plant name</p>
-                            <img src={plant} alt="plant" />
-                        </div>
+                        <GardenPlant name="sharty bae" plantImage={leafy} />
+                        <GardenPlant name="hottie hottie" plantImage={succulent} />
+                    </div>
+                    <img src={shelf} alt="shelf"className="shelf-img"/>
+                </div>
+
+                <div className="plant-section">
+                    <div className="plants-row">
+                       <GardenPlant name="Bartholomew" plantImage={flower} />
+                        <GardenPlant name="Airoma" plantImage={leafy} />
                     </div>
 
                     <img src={shelf} alt="shelf"className="shelf-img"/>
@@ -43,29 +48,8 @@ function GalleryView() {
 
                 <div className="plant-section">
                     <div className="plants-row">
-                        <div>
-                            <p className="plant_text">plant name</p>
-                            <img src={plant} alt="plant" />
-                        </div>
-                        <div>
-                            <p className="plant_text">plant name</p>
-                            <img src={plant} alt="plant" />
-                        </div>
-                    </div>
-
-                    <img src={shelf} alt="shelf"className="shelf-img"/>
-                </div>
-
-                <div className="plant-section">
-                    <div className="plants-row">
-                        <div>
-                            <p className="plant_text">plant name</p>
-                            <img src={plant} alt="plant" />
-                        </div>
-                        <div>
-                            <p className="plant_text">plant name</p>
-                            <img src={plant} alt="plant" />
-                        </div>
+                        <GardenPlant name="Sea Bass" plantImage={succulent} />
+                        <GardenPlant name="Cheeto" plantImage={flower} />
                     </div>
 
                     <img src={shelf} alt="shelf"className="shelf-img"/>
