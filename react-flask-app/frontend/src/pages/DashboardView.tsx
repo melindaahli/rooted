@@ -1,6 +1,6 @@
 import RightArrow from '../assets/arrow_right.svg';
-import Plant from '../assets/favicon.svg';
-import FakePlant from '../assets/favicon.svg';
+import Plant from '/favicon.svg';
+import FakePlant from '/favicon.svg';
 import { useNavigate } from 'react-router-dom';
 import { usePlants } from "../context/PlantContext";
 import TaskCard from "../components/TaskCard.tsx";
