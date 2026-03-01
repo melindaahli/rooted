@@ -26,7 +26,7 @@ function DashboardView() {
     <div className="blue_background">
         <div className="h-50">
             <p className="text-[25px] text-left pt-6.25 pl-7.5">welcome back, <br />
-                <span className="font-bold text-4xl m-0"> shart</span>
+                <span className="font-bold text-4xl m-0">flora</span>
             </p>
         </div>
         <div className="flex justify-end -my-1 mr-12 gap-2">
