@@ -47,7 +47,6 @@ p {
   /* Optional: flex to center content */
   display: flex;
   flex-direction: column;
-  
 }
 
 .tan_background {
@@ -85,8 +84,17 @@ p {
 
   display: flex;
   flex-direction: column;
+  height: 100%;
   align-items: center; /* allow children to use full width */
   padding: 30px;
+  
+}
+
+.bottom_icon {
+  margin-top: auto;
+  padding-bottom: 37px;
+  position: relative;
+  align-self: center;
 }
 
 .header {
@@ -103,48 +111,11 @@ p {
   font-weight: bold;
 }
 
-.add_plant {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  color: #FEF9E7;
-  background-color: #E3756B;
-  border-radius: 50px;
-  border: 2px solid #E3756B;
-  padding: 5px 15px;  /* make the button bigger */
-}
-
-.add_plant:hover {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  background-color: transparent;
-  color: #E3756B;
-  border: 2px solid #E3756B;
-  border-radius: 50px;
-  padding: 5px 15px;  /* make the button bigger */
-}
-
-.nav_text a { 
-  font-size: 18px; 
-  font-family: 'DM Sans', sans-serif; 
-  font-weight: bold;
-  color: #3E4D22 !important;
-  padding-left: 10px;
-}
-
 .parent_shelf {
   display: flex;
   align-items: center;
 }
 
-.nav {
-  display: flex;
-  padding-top: 40px;
-  padding-bottom: 15px;
-  align-items: left;
-  padding-left: 20px;
-}
 
 .plant-section {
   display: flex;
@@ -189,28 +160,35 @@ p {
   background-color: #E3756B;
   border-radius: 50px;
   border: 2px solid #E3756B;
-  padding: 5px 15px;  /* make the button bigger */
 }
-
-.add_plant:hover {
+.add_plant a{
   font-family: 'DM Sans', sans-serif;
   font-size: 12px;
   font-weight: bold;
-  background-color: transparent;
-  color: #E3756B;
-  border: 2px solid #E3756B;
+  color: #FEF9E7;
+  background-color: #E3756B;
   border-radius: 50px;
-  padding: 5px 15px;  /* make the button bigger */
+  border: 2px solid #E3756B;
+  text-decoration: none;
 }
 
-.nav_text a { 
+.cancel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  color: #E3756B;
+  background-color: transparent;
+  border-radius: 50px;
+  border: 2px solid #E3756B;
+}
+
+.nav_text { 
   font-size: 18px; 
   font-family: 'DM Sans', sans-serif; 
   font-weight: bold;
   color: #3E4D22 !important;
-  font-weight: bold !important;
-  font-size: 20px;
-  text-align: left;
+  text-decoration: none;
+  padding-left: 10px;
 }
 
 .plant-card{
@@ -355,6 +333,7 @@ p {
   padding: 30px;
 }
 
+/* garden & add plant css */
 .header {
   display: flex;
   justify-content: space-between;
@@ -369,36 +348,6 @@ p {
   font-weight: bold;
 }
 
-.add_plant {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  color: #FEF9E7;
-  background-color: #E3756B;
-  border-radius: 50px;
-  border: 2px solid #E3756B;
-  padding: 5px 15px;  /* make the button bigger */
-}
-
-.add_plant:hover {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  background-color: transparent;
-  color: #E3756B;
-  border: 2px solid #E3756B;
-  border-radius: 50px;
-  padding: 5px 15px;  /* make the button bigger */
-}
-
-.nav_text a { 
-  font-size: 18px; 
-  font-family: 'DM Sans', sans-serif; 
-  font-weight: bold;
-  color: #3E4D22 !important;
-  padding-left: 10px;
-}
-
 .parent_shelf {
   display: flex;
   align-items: center;
@@ -409,7 +358,7 @@ p {
   padding-top: 40px;
   padding-bottom: 15px;
   align-items: left;
-  padding-left: 20px;
+  margin-left: 20px;
 }
 
 .plant-section {
@@ -427,7 +376,7 @@ p {
   margin-bottom: -6px;  /* pulls plants closer to shelf */
 }
 
-.plant_text a {
+.plant_text {
   font-size: 20px; 
   font-family: 'Gamja Flower', sans-serif; 
   font-weight: bold;
@@ -439,12 +388,23 @@ p {
   width: 100%;
 
   overflow-y: auto;
-  min-height: 0;   /* ⭐ VERY IMPORTANT */
+  min-height: 0;   
   padding-bottom: 60px;
 }
 
 .plant-scroll::-webkit-scrollbar {
   display: none;
+}
+
+.textInput {
+  font-size: px;
+  font-family: 'DM Sans', sans-serif;
+  color: #3E4D22 !important;
+  width: 300px;
+  height: 45px;
+  border-radius: 7px;
+  background: linear-gradient(to top, rgb(146, 203, 79, 0.3), rgb(212, 230, 151, 0.3));
+  padding-left: 15px;
 }
 
 /* dashboard css */
@@ -475,7 +435,6 @@ p {
 }
 
 .scroll-container {
-  /* height: 300px;  */
   height: 100%;
   overflow-y: auto;
   scrollbar-width: none;

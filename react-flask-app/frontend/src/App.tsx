@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import DashboardView from './pages/DashboardView';
 import GalleryView from './pages/GalleryView';
 import SinglePlantView from './pages/SinglePlantView';
+import AddPlant from './pages/AddPlant';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -27,7 +28,8 @@ function App() {
           <nav>
             <Link to="/dashboard">Dashboard</Link> | {" "}
             <Link to="/gallery">Gallery</Link> | {" "}
-            <Link to="/single-plant">Single Plant</Link> 
+            <Link to="/single-plant">Single Plant</Link> {" "}
+            <Link to="/add-plant">Add Plant</Link> 
           </nav>
 
           {/* <h1>name is: |{data.name}|</h1>
@@ -38,6 +40,7 @@ function App() {
             <Route path="/dashboard" element={<DashboardView />} />
             <Route path="/gallery" element={<GalleryView />} /> 
             <Route path="/single-plant" element={<SinglePlantView />} />
+            <Route path="/add-plant" element={<AddPlant />} />
           </Routes>
       </div>
 

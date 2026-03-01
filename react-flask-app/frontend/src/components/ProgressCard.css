@@ -1,3 +1,7 @@
 progress {
     border-radius: 10px !important;
 }
+
+.green-gradient-bg {
+    background: linear-gradient(to top, #92cb4f, #d4e697);
+}
