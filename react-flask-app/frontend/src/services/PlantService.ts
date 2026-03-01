@@ -38,6 +38,7 @@ export async function fetchPlants(): Promise<PlantData[]> {
   const dummyData = [
     {
       plantId: "1",
+      name: "sharty bae",
       airTempF: 95,
       humidity: 40,
       soilMoisture: 10,
@@ -45,6 +46,7 @@ export async function fetchPlants(): Promise<PlantData[]> {
     },
     {
       plantId: "2",
+      name: "hottie hottie",
       airTempF: 75,
       humidity: 80,
       soilMoisture: 50,
