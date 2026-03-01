@@ -25,7 +25,6 @@ We combined hardware, IOT, and web technologies to develop Rooted. Sensor data i
 - TypeScript
 - HTML / CSS
 - Tailwind CSS
-- Daisy UI
 - Figma & Adobe Illustrator (UI/UX)
 
 ## Challenges we ran into
