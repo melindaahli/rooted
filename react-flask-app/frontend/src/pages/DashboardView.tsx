@@ -1,15 +1,24 @@
 import RightArrow from '../assets/arrow_right.svg';
 import Plant from '/favicon.svg';
-import FakePlant from '/favicon.svg';
+import Flower from '../assets/flower.svg';
+import Leafy from '../assets/leafy.svg';
+import Succulent from '../assets/succulent.svg';
 import { useNavigate } from 'react-router-dom';
 import { usePlants } from "../context/PlantContext";
 import TaskCard from "../components/TaskCard.tsx";
 import FavoritePlant from '../components/FavoritePlant.tsx';
+import type { PlantType } from '../data/plant-data';
 
 
 function DashboardView() {
     const navigate = useNavigate();
     const { plants, allTasks } = usePlants();
+
+    const plantTypeImages: Record<PlantType, string> = {
+        flower: Flower,
+        leafy: Leafy,
+        succulent: Succulent
+    };
 
     return (
     <div className="blue_background">
@@ -28,9 +37,17 @@ function DashboardView() {
                 </div>
             </header>
             <section className="favorite-plant-scroll self-start"> 
+                {/* <FavoritePlant fakeplant={FakePlant}/>
                 <FavoritePlant fakeplant={FakePlant}/>
-                <FavoritePlant fakeplant={FakePlant}/>
-                <FavoritePlant fakeplant={FakePlant}/>
+                <FavoritePlant fakeplant={FakePlant}/> */}
+                {plants
+                    .filter(p => p.favorite)
+                    .map((plant) => (
+                        <FavoritePlant
+                            key={plant.plantId}
+                            image={plantTypeImages[plant.plantType]}
+                        />
+                ))}
             </section>
             <p className="dashboard-title self-start mt-2">Recommended Tasks</p>
             <div className="scroll-container">

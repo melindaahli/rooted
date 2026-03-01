@@ -1,9 +1,10 @@
 import type { Task } from "../models/Task";
+export type PlantType = "flower" | "leafy" | "succulent";
 
 interface PlantDataModel {
     plantId: string;
     name: string;
-    plantType: string;
+    plantType: PlantType;
     favorite: boolean;
 
     temperature?: number;
@@ -20,7 +21,7 @@ interface PlantDataModel {
 export class PlantData {
     plantId: string;
     name: string;
-    plantType: string;
+    plantType: PlantType;
     favorite: boolean;
 
     airTempF: number;
