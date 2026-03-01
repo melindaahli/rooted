@@ -1,5 +1,6 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import DashboardView from './pages/DashboardView';
 import GalleryView from './pages/GalleryView';
@@ -9,27 +10,18 @@ import AddPlant from './pages/AddPlant';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  // const [data, setData] = useState({ name: '', message: '' });
-  // var endpoint = '/api/data'
-
-  // useEffect(() => {
-  //   fetch('http://127.0.0.1:5000' + endpoint) // Fetch from the Flask API
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data))
-  //     .catch((error) => console.error('Error fetching data:', error));
-  // }, []);
 
   return (
     <BrowserRouter>
 
       <div className="App">
-          {/* nav bar */}
-          <nav>
+          {/* nav bar for dev */}
+          {/* <nav>
             <Link to="/dashboard">Dashboard</Link> | {" "}
             <Link to="/gallery">Gallery</Link> | {" "}
             <Link to="/plant/1">Single Plant</Link> | {" "}
             <Link to="/add-plant">Add Plant</Link> 
-          </nav>
+          </nav> */}
 
           {/* routes */}
           <Routes>

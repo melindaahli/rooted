@@ -12,11 +12,6 @@ function GalleryView() {
     return (
      
     <div className="blue_background">
-        {/* <div className=" flex flex-row align-center gap-2 row-start-1 row-end-2" onClick={() => { navigate("/gallery")}}>
-            <img src={arrow} style={{ width: '8px', height: 'auto', transform: 'rotate(180deg)' }}/>
-            <p className="m-0">Garden</p>
-        </div> */}
-
         <div className="nav" onClick={() => { navigate("/dashboard")}}>
             <img src={arrow} style={{ width: '8px', height: 'auto', transform: 'rotate(180deg)' }} />
             <p className="nav_text mb-0">Dashboard</p>

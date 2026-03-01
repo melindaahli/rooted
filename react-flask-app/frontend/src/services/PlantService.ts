@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { PlantData } from "../data/plant-data";
 
-const PRODUCTION = false;
-const API_URL = 'http://172.31.76.126:5000';
+const PRODUCTION = false; // CHANGE TO TRUE FOR LIVE SENSOR DATA
+const API_URL = 'http://192.168.0.151:5000';
 
 type SensorResponse = {
   id: number;
@@ -20,14 +20,14 @@ export async function fetchPlants(): Promise<PlantData[]> {
       plantType: "leafy",
       favorite: true,
 
-      temperature: 95,
-      humidity: 40,
-      moisture: 10,
-      light: "Indirect Light",
+      temperature: 0,
+      humidity: 0,
+      moisture: 0,
+      light: "Full Sun",
 
-      recTemperature: 100,
+      recTemperature: 85,
       recHumidity: 100,
-      recMoisture: 100,
+      recMoisture: 260,
       recLight: "Partial Sun"
     }),
     new PlantData({
@@ -36,14 +36,14 @@ export async function fetchPlants(): Promise<PlantData[]> {
       plantType: "succulent",
       favorite: false,
 
-      temperature: 75,
-      humidity: 80,
-      moisture: 50,
-      light: "Indirect Light",
+      temperature: 100,
+      humidity: 100,
+      moisture: 10,
+      light: "Full Sun",
 
-      recTemperature: 100,
+      recTemperature: 85,
       recHumidity: 100,
-      recMoisture: 100,
+      recMoisture: 260,
       recLight: "Partial Sun"
     }),
     new PlantData({
@@ -55,12 +55,12 @@ export async function fetchPlants(): Promise<PlantData[]> {
       temperature: 75,
       humidity: 80,
       moisture: 50,
-      light: "Indirect Light",
+      light: "Full Sun",
 
-      recTemperature: 100,
+      recTemperature: 70,
       recHumidity: 100,
-      recMoisture: 100,
-      recLight: "Partial Sun"
+      recMoisture: 260,
+      recLight: "Full Sun"
     }), 
     new PlantData({
       plantId: "4",
@@ -68,14 +68,14 @@ export async function fetchPlants(): Promise<PlantData[]> {
       plantType: "leafy",
       favorite: false,
 
-      temperature: 75,
-      humidity: 80,
+      temperature: 99,
+      humidity: 89,
       moisture: 50,
-      light: "Indirect Light",
+      light: "Full Sun",
 
-      recTemperature: 100,
+      recTemperature: 85,
       recHumidity: 100,
-      recMoisture: 100,
+      recMoisture: 260,
       recLight: "Partial Sun"
     }),
     new PlantData({
@@ -84,14 +84,14 @@ export async function fetchPlants(): Promise<PlantData[]> {
       plantType: "succulent",
       favorite: true,
 
-      temperature: 75,
+      temperature: 76,
       humidity: 80,
-      moisture: 50,
+      moisture: 250,
       light: "Indirect Light",
 
-      recTemperature: 100,
+      recTemperature: 90,
       recHumidity: 100,
-      recMoisture: 100,
+      recMoisture: 260,
       recLight: "Partial Sun"
     })
   ];
@@ -99,9 +99,9 @@ export async function fetchPlants(): Promise<PlantData[]> {
   let sensorData: SensorResponse[] = [
     {
       id: 1,
-      moisture: 72,
-      temperature: 70,
-      humidity: 400,
+      moisture: 222,
+      temperature: 22,
+      humidity: 22,
       light: "Indirect Light"
     }
   ];
@@ -128,9 +128,10 @@ export async function fetchPlants(): Promise<PlantData[]> {
       plant.soilMoisture = sensor.moisture;
       plant.lightLevel = sensor.light;
       plant.tasks = plant.generateTasks();
-      console.log(plant)
+      console.log(plant);
     }
   });
 
+  console.log(basePlants);
   return basePlants;
 }
