@@ -453,3 +453,14 @@ p {
   align-items: center; 
   padding: 30px;
 }
+
+.favorite-plant-scroll {
+  display: flex;
+  height: 80%;
+  width: 100%;
+  gap: 5px;
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}

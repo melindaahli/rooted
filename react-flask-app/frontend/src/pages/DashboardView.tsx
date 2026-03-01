@@ -1,9 +1,10 @@
 import RightArrow from '../assets/arrow_right.svg';
 import Plant from '../assets/favicon.svg';
-import FakePlant from '../assets/plant_placeholder.png';
+import FakePlant from '../assets/favicon.svg';
 import { useNavigate } from 'react-router-dom';
 import { usePlants } from "../context/PlantContext";
 import TaskCard from "../components/TaskCard.tsx";
+import FavoritePlant from '../components/FavoritePlant.tsx';
 
 
 function DashboardView() {
@@ -26,16 +27,12 @@ function DashboardView() {
                     <img src={RightArrow} className="w-[45px]"/>
                 </div>
             </header>
-            <div>
-                <p>Favorites</p>
-            </div>
-            <section className="flex justify-start"> {/* may turn into its own react component */}
-                <div className="plant-card" >
-                    <img src={FakePlant} className="pb-2"/>
-                    {/* <p className="mb-0">sharty</p> */}
-                </div>
+            <section className="favorite-plant-scroll self-start"> 
+                <FavoritePlant fakeplant={FakePlant}/>
+                <FavoritePlant fakeplant={FakePlant}/>
+                <FavoritePlant fakeplant={FakePlant}/>
             </section>
-            <p className="dashboard-title self-start mt-4">Recommended Tasks</p>
+            <p className="dashboard-title self-start mt-2">Recommended Tasks</p>
             <div className="scroll-container">
                 <section className="flex flex-col justify-start align-center gap-2"> {/* may turn into its own react component */}
                     {allTasks.map(task => {
