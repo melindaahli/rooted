@@ -56,49 +56,89 @@ export class PlantData {
     }
 
     public generateTasks(): Task[] {
-        const tasks: Task[] = [];
+    const tasks: Task[] = [];
 
-        if (this.soilMoisture < this.recSoilMoisture) {
+    const lightLevels = ["Lowlight", "Indirect Light", "Partial Sun", "Full Sun"];
+
+    // Soil moisture: too low or too high
+    if (this.soilMoisture < this.recSoilMoisture * 0.9) {
         tasks.push({
             id: `${this.plantId}-water`,
             plantId: this.plantId,
             title: "moisture",
             status: "pending",
-            message: "Please water your plant!"
+            message: "Your plant is too dry!"
         });
-        }
-
-        if (this.airTempF > this.recAirTempF) {
+    } else if (this.soilMoisture > this.recSoilMoisture * 1.1) {
         tasks.push({
-            id: `${this.plantId}-temperature`,
+            id: `${this.plantId}-moisture-high`,
+            plantId: this.plantId,
+            title: "moisture",
+            status: "pending",
+            message: "Your plant is drowning!"
+        });
+    }
+
+    // Temperature: too hot or too cold
+    if (this.airTempF < this.recAirTempF - 5) {
+        tasks.push({
+            id: `${this.plantId}-temp-low`,
             plantId: this.plantId,
             title: "temperature",
             status: "pending",
-            message: "Please cool down your plant!"
+            message: "Your plant is too cold! Warm it up!"
         });
-        }
-
-        if (this.humidity > this.recHumidity) { // todo
+    } else if (this.airTempF > this.recAirTempF + 5) {
         tasks.push({
-            id: `${this.plantId}-humidity`,
+            id: `${this.plantId}-temp-high`,
+            plantId: this.plantId,
+            title: "temperature",
+            status: "pending",
+            message: "Your plant is burning up!."
+        });
+    }
+
+    // Humidity: too low or too high
+    if (this.humidity < this.recHumidity - 10) {
+        tasks.push({
+            id: `${this.plantId}-humidity-low`,
             plantId: this.plantId,
             title: "humidity",
             status: "pending",
-            message: "Please humidify your plant!"
+            message: "More humidity please!"
         });
-        }
-
-        if (this.lightLevel > this.recLightLevel) { // todo
+    } else if (this.humidity > this.recHumidity + 10) {
         tasks.push({
-            id: `${this.plantId}-light`,
+            id: `${this.plantId}-humidity-high`,
+            plantId: this.plantId,
+            title: "humidity",
+            status: "pending",
+            message: "Too much humidity!"
+        });
+    }
+
+    // Light: compare positions in lightLevels array
+    const currentLightIndex = lightLevels.indexOf(this.lightLevel);
+    const recLightIndex = lightLevels.indexOf(this.recLightLevel);
+
+    if (currentLightIndex < recLightIndex) {
+        tasks.push({
+            id: `${this.plantId}-light-low`,
             plantId: this.plantId,
             title: "light",
             status: "pending",
-            message: "Please light up your plant's world!"
+            message: "Light up your plant's world!"
         });
-        }
-
-        return tasks;
-
+    } else if (currentLightIndex > recLightIndex) {
+        tasks.push({
+            id: `${this.plantId}-light-high`,
+            plantId: this.plantId,
+            title: "light",
+            status: "pending",
+            message: "Your plant is getting too much light!"
+        });
     }
+
+    return tasks;
+}
 }

@@ -20,48 +20,44 @@ function DashboardView() {
         succulent: Succulent
     };
 
+    console.log(plants)
+
     return (
     <div className="blue_background">
-        <div className="h-[324px]">
-            <p className="text-[25px] text-left pt-[25px] pl-[30px]">welcome back, shart</p>
+        <div className="h-50">
+            <p className="text-[25px] text-left pt-6.25 pl-7.5">welcome back, <br />
+                <span className="font-bold text-4xl m-0"> shart</span>
+            </p>
         </div>
-        <div className="flex justify-end -mb-1 mr-4">
-             <img src={Plant} className="w-[100px]"/>
+        <div className="flex justify-end -my-1 mr-12 gap-2">
+             <img src={Plant} className="w-27"/>
         </div>
        
         <div className="tan-card-dashboard">
-            <header className="flex items-center justify-between w-full h-[45px]">
+            <header className="flex items-center justify-between w-full h-11.25 mb-2">
                 <h2 className="dashboard-title">My Garden</h2>
                 <div onClick={() => { navigate("/gallery")}}>
-                    <img src={RightArrow} className="w-[45px]"/>
+                    <img src={RightArrow} className="w-11.25"/>
                 </div>
             </header>
             <section className="favorite-plant-scroll self-start"> 
-                {/* <FavoritePlant fakeplant={FakePlant}/>
-                <FavoritePlant fakeplant={FakePlant}/>
-                <FavoritePlant fakeplant={FakePlant}/> */}
                 {plants
                     .filter(p => p.favorite)
                     .map((plant) => (
                         <FavoritePlant
                             key={plant.plantId}
+                            plant={plant}
                             image={plantTypeImages[plant.plantType]}
                         />
                 ))}
             </section>
             <p className="dashboard-title self-start mt-2">Recommended Tasks</p>
-            <div className="scroll-container">
-                <section className="flex flex-col justify-start align-center gap-2"> {/* may turn into its own react component */}
+            <div className="scroll-container pb-2.5">
+                <section className="flex flex-col justify-start align-center gap-2"> 
                     {allTasks.map(task => {
                         const plant = plants.find(p => p.plantId === task.plantId);
 
                         return (
-                            // <div key={task.id} className="pl-[15px] pt-[5px] w-[300px] h-[60px] bg-linear-to-t from-[#92cb4f4d] to-[#d4e6974d] rounded-[15px]">
-                            // <p className="mb-0 text-start">
-                            //     {plant?.name ?? "Unknown Plant"} - {task.title}
-                            // </p>
-                            // <p className="mb-0 text-start">{task.message}</p>
-                            // </div>
                             <TaskCard task={task} plant={plant}/>
                         );
                     })}

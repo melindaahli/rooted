@@ -17,45 +17,87 @@ function SinglePlantView() {
   const navigate = useNavigate();
   const { plants } = usePlants();
 
-  const plant = plants.find(p => p.plantId === plantId);
+  const lightLevels = ["Lowlight", "Indirect Light", "Partial Sun", "Full Sun"];
+  const moistureLevels = ["No Moisture", "Dry Dirt", "Moist Dirt", "Soaked Dirt"];
 
+  const plant = plants.find(p => p.plantId === plantId);
   const [segmentViewId, setSegmentViewId] = useState<number>(1);
 
-  if (!plant) {
-    return <div className="p-4">Loading plant...</div>;
-  }
+  if (!plant) return <div className="p-4">Loading plant...</div>;
 
+  // Current and recommended values
   const currentTemp = plant.airTempF;
   const maxTemp = plant.recAirTempF;
 
   const currentHumidity = plant.humidity;
   const maxHumidity = plant.recHumidity;
 
-  const currentLight = plant.lightLevel === "Indirect Light" ? 70 : 100;
-  const maxLight = 100;
+  const currentLight = plant.lightLevel;
+  const recommendedLight = plant.recLightLevel;
 
-  const currentMoisture = plant.soilMoisture;
-  const maxMoisture = plant.recSoilMoisture;
-
-  function getPartialScore(curr: number, max: number) {
-    if (max === 0) return 0;
-    const percentage = curr / max;
-    if (percentage > 1 || percentage < 0) return percentage % 1;
-    return percentage;
+  function getMoistureStatus(soilMoisture: number) {
+    if (soilMoisture === 0) return "No Moisture";
+    if (soilMoisture > 0 && soilMoisture < 200) return "Dry Dirt";
+    if (soilMoisture >= 200 && soilMoisture <= 350) return "Moist Dirt";
+    if (soilMoisture > 350) return "Soaked Dirt";
+    return "No data";
   }
 
-  function calculateScore() {
-    return (
-      (getPartialScore(currentTemp, maxTemp) +
-        getPartialScore(currentHumidity, maxHumidity) +
-        getPartialScore(currentLight, maxLight) +
-        getPartialScore(currentMoisture, maxMoisture)) /
-      4 *
-      100
-    );
+  const currentMoisture = getMoistureStatus(plant.soilMoisture);
+  const recommendedMoisture = getMoistureStatus(plant.recSoilMoisture);
+
+  // Generic partial score function
+  function getPartialScore(curr: number | string | undefined, max: number | string): number {
+    if (typeof curr === "number" && typeof max === "number") {
+      if (max === 0) return 0;
+      let percentage = curr / max;
+      return percentage >= 0 && percentage <= 1 ? percentage : percentage % 1.0;
+    }
+
+    if (typeof curr === "string" && typeof max === "string") {
+      if (lightLevels.includes(curr) && lightLevels.includes(max)) {
+        const diff = Math.abs(lightLevels.indexOf(curr) - lightLevels.indexOf(max));
+        return 1 - diff / (lightLevels.length - 1);
+      }
+      if (moistureLevels.includes(curr) && moistureLevels.includes(max)) {
+        const diff = Math.abs(moistureLevels.indexOf(curr) - moistureLevels.indexOf(max));
+        return 1 - diff / (moistureLevels.length - 1);
+      }
+    }
+    return 0;
   }
 
-  const healthScore = Math.round(calculateScore());
+  // Numeric scores
+  const tempScore = getPartialScore(currentTemp, maxTemp);
+  const humidityScore = getPartialScore(currentHumidity, maxHumidity);
+  const moistureScore = getPartialScore(currentMoisture, recommendedMoisture);
+  const lightScore = getPartialScore(currentLight, recommendedLight);
+
+  const healthScore = Math.round(((tempScore + humidityScore + moistureScore + lightScore) / 4) * 100);
+
+  // Health string functions
+  function getNumericHealthString(score: number): "Good" | "Okay" | "Bad" {
+    if (score >= 0.85) return "Good";
+    if (score >= 0.6) return "Okay";
+    return "Bad";
+  }
+
+  function getDiscreteHealthString(current: string, recommended: string, scale: string[]): "Good" | "Okay" | "Bad" {
+    const currIndex = scale.indexOf(current);
+    const recIndex = scale.indexOf(recommended);
+    if (currIndex === -1 || recIndex === -1) return "Bad";
+    const diff = Math.abs(currIndex - recIndex);
+    if (diff === 0) return "Good";
+    if (diff === 1) return "Okay";
+    return "Bad";
+  }
+
+  // Individual health strings
+  const tempHealthString = getNumericHealthString(tempScore);
+  const humidityHealthString = getNumericHealthString(humidityScore);
+  const moistureHealthString = getDiscreteHealthString(currentMoisture, recommendedMoisture, moistureLevels);
+  const lightHealthString = getDiscreteHealthString(currentLight, recommendedLight, lightLevels);
+
 
   function renderSegmentView() {
     if (segmentViewId === 1) {
@@ -63,27 +105,29 @@ function SinglePlantView() {
         <div className="flex flex-col gap-2">
           <ProgressCard
             category="Temperature"
+            healthString={tempHealthString}
             srcIcon={temperature}
             currentVal={currentTemp}
             maxVal={maxTemp}
           />
           <ProgressCard
             category="Humidity"
+            healthString={humidityHealthString}
             srcIcon={humidity}
             currentVal={currentHumidity}
             maxVal={maxHumidity}
           />
           <ProgressCard
             category="Light"
+            healthString={lightHealthString}
             srcIcon={light}
-            currentVal={currentLight}
-            maxVal={maxLight}
+            currentText={currentLight}
           />
           <ProgressCard
             category="Moisture"
+            healthString={moistureHealthString}
             srcIcon={humidity}
-            currentVal={currentMoisture}
-            maxVal={maxMoisture}
+            currentText={currentMoisture}
           />
         </div>
       );
@@ -103,7 +147,7 @@ function SinglePlantView() {
   }
 
   return (
-    <div className="grid grid-cols-1 grid-rows-10 p-4 tan_background">
+    <div className="grid grid-cols-1 grid-rows-10 px-4 pt-4 tan_background">
       <div
         className="flex flex-row items-center"
         onClick={() => navigate("/gallery")}
@@ -138,7 +182,7 @@ function SinglePlantView() {
         <HealthScoreHeart score={healthScore} />
       </div>
 
-      <div className="flex justify-around p-2">
+      <div className="flex justify-between p-2">
         <div onClick={() => setSegmentViewId(1)}>
           <p className={segmentViewId === 1 ? "underline" : ""}>Details</p>
         </div>
@@ -152,7 +196,7 @@ function SinglePlantView() {
         </div>
       </div>
 
-      <div className="scroll-container">{renderSegmentView()}</div>
+      <div className="scroll-container pb-3">{renderSegmentView()}</div>
     </div>
   );
 }

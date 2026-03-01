@@ -73,8 +73,12 @@ p {
   padding-top: 20px;
 }
 
-.plant-scroll::-webkit-scrollbar {
+.plant_scroll::-webkit-scrollbar {
   display: none;
+}
+
+.plant_scroll {
+  scrollbar-width: none;
 }
 
 .add_plant {
@@ -314,7 +318,7 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center; 
-  padding: 30px;
+  padding: 30px 30px 0 30px;
 }
 
 .favorite-plant-scroll {
