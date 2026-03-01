@@ -13,13 +13,40 @@ const PlantContext = createContext<PlantContextType | null>(null);
 export function PlantProvider({ children }: { children: React.ReactNode }) {
   const [plants, setPlants] = useState<PlantData[]>([]);
 
+  // useEffect(() => {
+  //   async function loadPlants() {
+  //     const plantData = await fetchPlants();
+  //     setPlants(plantData);
+  //   }
+
+  //   loadPlants();
+  // }, []);
+
   useEffect(() => {
+    let isMounted = true;
+
     async function loadPlants() {
-      const plantData = await fetchPlants();
-      setPlants(plantData);
+      try {
+        const plantData = await fetchPlants();
+        if (isMounted) {
+          setPlants(plantData);
+        }
+      } catch (error) {
+        console.error("Failed to fetch plants:", error);
+      }
     }
 
+    // initial load
     loadPlants();
+
+    // poll every 5 seconds
+    const intervalId = setInterval(loadPlants, 5000);
+
+    // cleanup on unmount
+    return () => {
+      isMounted = false;
+      clearInterval(intervalId);
+    };
   }, []);
 
   const allTasks = plants.flatMap(plant => plant.tasks);

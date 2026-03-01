@@ -1,58 +1,121 @@
-// import axios from 'axios';
-
-// const API_URL = 'https://127.0.0.1';
-
-// export const fetchData = async (endpoint) => {
-//     try {
-//         const response = await axios.get('${API_URL}/${endpoint}');
-//         return response.data;
-//     } catch (error) {
-//         console.error('Error fetching plant data:', error);
-//         throw error;
-//     }
-// }
-
-// async function getAll() {
-//     const endpoint = '/api/data';
-//     try {
-//         const result = await axios.get(endpoint);
-//         return result.data || [];
-//     } catch (error) {
-//         console.error('Error fetching plant data: ', error);
-//         throw error;
-//     }
-// }
-
-// export const PlantService = {
-//     getAll
-// };
-
-
-// TEST DATA DELETE LATER
+import axios from 'axios';
 import { PlantData } from "../data/plant-data";
 
-export async function fetchPlants(): Promise<PlantData[]> {
-  // simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 500));
+const PRODUCTION = true;
+const API_URL = 'http://172.31.76.126:5000';
 
-  const dummyData = [
+type SensorResponse = {
+  id: number;
+  moisture: number;
+  temperature: number;
+  humidity: number;
+  light: string;
+};
+
+export async function fetchPlants(): Promise<PlantData[]> {
+  const basePlants = [
     {
       plantId: "1",
       name: "sharty bae",
-      airTempF: 95,
+      temperature: 95,
       humidity: 40,
-      soilMoisture: 10,
-      lightLevel: 800
+      moisture: 10,
+      light: "Indirect Light",
+
+      recTemperature: 100,
+      recHumidity: 100,
+      recMoisture: 100,
+      recLight: "Partial Sun"
     },
     {
       plantId: "2",
-      name: "hottie hottie",
-      airTempF: 75,
+      name: "hottie hottie"
+      temperature: 75,
       humidity: 80,
-      soilMoisture: 50,
-      lightLevel: 500
+      moisture: 50,
+      light: "Indirect Light",
+
+      recTemperature: 100,
+      recHumidity: 100,
+      recMoisture: 100,
+      recLight: "Partial Sun"
+    },
+    {
+      plantId: "3",
+      name: "Bartholomew"
+      temperature: 75,
+      humidity: 80,
+      moisture: 50,
+      light: "Indirect Light",
+
+      recTemperature: 100,
+      recHumidity: 100,
+      recMoisture: 100,
+      recLight: "Partial Sun"
+    }, 
+    {
+      plantId: "4",
+      name: "Airoma",
+      temperature: 75,
+      humidity: 80,
+      moisture: 50,
+      light: "Indirect Light",
+
+      recTemperature: 100,
+      recHumidity: 100,
+      recMoisture: 100,
+      recLight: "Partial Sun"
+    },
+    {
+      plantId: "5",
+      name: "Sea Bass",
+      temperature: 75,
+      humidity: 80,
+      moisture: 50,
+      light: "Indirect Light",
+
+      recTemperature: 100,
+      recHumidity: 100,
+      recMoisture: 100,
+      recLight: "Partial Sun"
+    }
+  ].map(p => new PlantData(p));
+
+  let sensorData: SensorResponse[] = [
+    {
+      id: 1,
+      moisture: 72,
+      temperature: 70,
+      humidity: 400,
+      light: "Indirect Light"
     }
   ];
 
-  return dummyData.map(data => new PlantData(data));
+  // fetch live sensor data
+  if (PRODUCTION) {
+    try {
+      const response = await axios.get<SensorResponse[]>(`${API_URL}/api/sensors`);
+      sensorData = Array.isArray(response.data) ? response.data : [response.data];
+    } catch (error) {
+      console.error('Error fetching plant data:', error);
+    }
+  }
+  
+  // merge sensor data into plants
+  sensorData.forEach(sensor => {
+    const plant = basePlants.find(
+      p => p.plantId === sensor.id.toString()
+    );
+
+    if (plant) {
+      plant.airTempF = sensor.temperature;
+      plant.humidity = sensor.humidity;
+      plant.soilMoisture = sensor.moisture;
+      plant.lightLevel = sensor.light;
+      plant.tasks = plant.generateTasks();
+      console.log(plant)
+    }
+  });
+
+  return basePlants;
 }

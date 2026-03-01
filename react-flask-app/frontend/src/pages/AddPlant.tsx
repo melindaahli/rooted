@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import arrow from "../assets/nocircle_arrow.svg";
-import favicon from "../assets/favicon.svg";
+import favicon from "/favicon.svg";
 
 function AddPlant() {
   const [plantName, setPlantName] = useState("");
   const [plantSpecies, setPlantSpecies] = useState("");
+
+  const navigate = useNavigate();
 
   const handleAddPlant = () => {
     console.log("Plant Name:", plantName);
@@ -14,9 +17,9 @@ function AddPlant() {
 
   return (
     <div className="blue_background">
-      <div className="nav">
-        <img src={arrow} style={{ transform: "rotate(180deg)" }} />
-        <a className="nav_text" href="DashboardView.tsx">Dashboard</a>
+      <div className="nav" onClick={() => navigate("/gallery")}>
+        <img src={arrow} style={{ width: '8px', height: 'auto', transform: 'rotate(180deg)' }} />
+        <p className="nav_text m-0">Dashboard</p>
       </div>
 
       <div className="tan-card">
@@ -48,7 +51,7 @@ function AddPlant() {
         <br></br>
         {/* Buttons */}
         <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-          <button className="cancel" onClick={() => console.log("Cancelled")}>
+          <button className="cancel" onClick={() => navigate("/gallery")}>
             Cancel
           </button>
           <button className="add_plant" onClick={handleAddPlant}>
