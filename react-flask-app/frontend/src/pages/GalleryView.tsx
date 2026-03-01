@@ -63,7 +63,7 @@ function GalleryView() {
 
                 <div className="plant-section">
                     <div className="plants-row">
-                        <GardenPlant name="Airoma" plantImage={succulent} />
+                        <GardenPlant name="Sea Bass" plantImage={leafy} />
                         {plants.map((plant, index) => (
                             <div
                                 key={index}
