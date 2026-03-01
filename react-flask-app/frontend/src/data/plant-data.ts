@@ -2,10 +2,15 @@ import type { Task } from "../models/Task";
 
 interface PlantDataModel {
     plantId: string;
-    airTempF?: number;
+    temperature?: number;
     humidity?: number;
-    soilMoisture?: number;
-    lightLevel?: number;
+    moisture?: number;
+    light?: string;
+
+    recTemperature: number;
+    recHumidity: number;
+    recMoisture: number;
+    recLight: string;
 }
 
 export class PlantData {
@@ -13,23 +18,34 @@ export class PlantData {
     airTempF: number;
     humidity: number;
     soilMoisture: number;
-    lightLevel: number;
+    lightLevel: string;
+
+    recAirTempF: number;
+    recHumidity: number;
+    recSoilMoisture: number;
+    recLightLevel: string;
+
     tasks: Task[];
 
     constructor(objectModel:PlantDataModel) {
         this.plantId = objectModel['plantId'] ?? "";
-        this.airTempF = objectModel['airTempF'] ?? 0;
+        this.airTempF = objectModel['temperature'] ?? 0;
         this.humidity = objectModel['humidity'] ?? 0;
-        this.soilMoisture = objectModel['soilMoisture'] ?? 0;
-        this.lightLevel = objectModel['lightLevel'] ?? 0;
+        this.soilMoisture = objectModel['moisture'] ?? 0;
+        this.lightLevel = objectModel['light'] ?? "No Light Data";
+
+        this.recAirTempF = objectModel['recTemperature'];
+        this.recHumidity = objectModel['recHumidity'];
+        this.recSoilMoisture = objectModel['recMoisture'];
+        this.recLightLevel = objectModel['recLight'];
 
         this.tasks = this.generateTasks();
     }
 
-    private generateTasks(): Task[] {
+    public generateTasks(): Task[] {
         const tasks: Task[] = [];
 
-        if (this.soilMoisture < 20) {
+        if (this.soilMoisture < this.recSoilMoisture) {
         tasks.push({
             id: `${this.plantId}-water`,
             plantId: this.plantId,
@@ -38,7 +54,7 @@ export class PlantData {
         });
         }
 
-        if (this.airTempF > 90) {
+        if (this.airTempF > this.recAirTempF) {
         tasks.push({
             id: `${this.plantId}-temperature`,
             plantId: this.plantId,
@@ -47,7 +63,7 @@ export class PlantData {
         });
         }
 
-        if (this.humidity > 70) { // todo
+        if (this.humidity > this.recHumidity) { // todo
         tasks.push({
             id: `${this.plantId}-humidity`,
             plantId: this.plantId,
@@ -56,7 +72,7 @@ export class PlantData {
         });
         }
 
-        if (this.lightLevel > 600) { // todo
+        if (this.lightLevel > this.recLightLevel) { // todo
         tasks.push({
             id: `${this.plantId}-light`,
             plantId: this.plantId,

@@ -1,6 +1,7 @@
 {
-    "airTempF": "67",
-    "humidity": "61",
-    "soilMoisture": "50",
-    "lightLevel": "80"
+  "id": 1,
+  "moisture": 72,
+  "temperature": 70,
+  "humidity": 400,
+  "light": "Indirect Light"
 }
