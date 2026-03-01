@@ -1,103 +1,144 @@
-import { useState } from 'react';
-import ProgressCard from "../components/ProgressCard.tsx";
-import PlantShelf from "../components/PlantShelf.tsx";
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { usePlants } from "../context/PlantContext";
+import ProgressCard from "../components/ProgressCard";
+import PlantShelf from "../components/PlantShelf";
+import HealthScoreHeart from "../components/HealthScoreHeart";
 
 import humidity from "../assets/humidity.svg";
-import arrow from "../assets/nocircle_arrow.svg"
-import HealthScoreHeart from '../components/HealthScoreHeart.tsx';
- 
+import arrow from "../assets/nocircle_arrow.svg";
+
 function SinglePlantView() {
-    const navigate = useNavigate();
+  const { plantId } = useParams();
+  const navigate = useNavigate();
+  const { plants } = usePlants();
 
-    const plantName: string = "plant name";
-    const speciesName: string = "species name";
+  const plant = plants.find(p => p.plantId === plantId);
 
-    // 1: Details
-    // 2: Recommended Tasks
-    // 3: Gallery
-    let [segmentViewId, setSegmentViewId] = useState<number>(1);
+  const [segmentViewId, setSegmentViewId] = useState<number>(1);
 
-    var currentTemp: number = 100;
-    var maxTemp: number = 80;
+  if (!plant) {
+    return <div className="p-4">Loading plant...</div>;
+  }
 
-    var currentHumidity: number = 83;
-    var maxHumidity: number = 100;
+  const currentTemp = plant.airTempF;
+  const maxTemp = plant.recAirTempF;
 
-    var currentLight: number = 70;
-    var maxLight: number = 100;
+  const currentHumidity = plant.humidity;
+  const maxHumidity = plant.recHumidity;
 
-    var currentMoisture: number = 70;
-    var maxMoisture: number = 100;
+  const currentLight = plant.lightLevel === "Indirect Light" ? 70 : 100;
+  const maxLight = 100;
 
-    var healthScore = calculateScore();
+  const currentMoisture = plant.soilMoisture;
+  const maxMoisture = plant.recSoilMoisture;
 
-    function calculateScore() {
-        return ( getPartialScore(currentTemp, maxTemp) + getPartialScore(currentHumidity, maxHumidity) 
-                 + getPartialScore(currentLight, maxLight) + getPartialScore(currentMoisture, maxMoisture) ) / 4 * 100;
-    }
+  function getPartialScore(curr: number, max: number) {
+    if (max === 0) return 0;
+    const percentage = curr / max;
+    if (percentage > 1 || percentage < 0) return percentage % 1;
+    return percentage;
+  }
 
-    function getPartialScore(curr: number, max: number) {
-        var percentage = curr/max;
-        if (percentage > 1 || percentage < 0) return percentage % 1;
-        return percentage;
-    }
-
-    function renderSegmentView() {
-        if (segmentViewId === 1) {
-            return (
-                <div className="flex flex-col justify-around gap-2">
-                    <ProgressCard category="Temperature" srcIcon={humidity} currentVal={currentTemp} maxVal={maxTemp} />
-                    <ProgressCard category="Humidity Level" iconSrc="/../assests/humidity.svg" currentVal={currentHumidity} maxVal={maxHumidity} />
-                    <ProgressCard category="Light Level" iconSrc="/../assests/light.svg" currentVal={currentLight} maxVal={maxLight} />
-                    <ProgressCard category="Moisture Level" iconSrc="/../assests/humidity.svg" currentVal={currentMoisture} maxVal={maxMoisture} />
-                </div>
-            );
-        } else if (segmentViewId === 2) {
-            return <>recommended tasks</>;
-        } else {
-            return <>gallery</>;
-        }
-    }
-
+  function calculateScore() {
     return (
-    <div className="grid grid-cols-1 grid-rows-10 p-4 tan_background no-flex">
-        <div className=" flex flex-row align-center row-start-1 row-end-2" onClick={() => { navigate("/gallery")}}>
-            <img src={arrow} style={{ width: '8px', height: 'auto', transform: 'rotate(180deg)' }}/>
-            <p className="m-0 nav_text">Garden</p>
-        </div>
-
-
-        <PlantShelf />
-
-        <div className="flex flex-row justify-between align-middle row-start-5 row-end-6 m-2">
-            <div className="flex flex-col justify-start align-middle">
-                <h1 className="gamja-flower mb-0">{plantName}</h1>
-                <p className="text-start mb-0">{speciesName}</p>
-            </div>
-            <div className="flex flex-col justify-center">
-                <HealthScoreHeart score={healthScore} />
-            </div>
-        </div>
-        
-        <div className="flex flex-row justify-around row-start-7 row-end-10 p-2">
-            <div className="" onClick={() => { setSegmentViewId(1) }}>
-                <p className={`text-sm m-0 ${segmentViewId == 1 ? 'underline' : 'no-underline'}`}>Details</p>
-            </div>
-            <div className="" onClick={() => { setSegmentViewId(2) }}>
-                <p className={`text-sm m-0 ${segmentViewId == 2 ? 'underline' : 'no-underline'}`}>Recommended Tasks</p>
-            </div>
-            <div className="" onClick={() => { setSegmentViewId(3) }}>
-                <p className={`text-sm m-0 ${segmentViewId == 3 ? 'underline' : 'no-underline'}`}>Gallery</p>
-            </div>
-        </div>
-
-        <div className="scroll-container">
-            {renderSegmentView()}
-        </div>
-
-    </div>
+      (getPartialScore(currentTemp, maxTemp) +
+        getPartialScore(currentHumidity, maxHumidity) +
+        getPartialScore(currentLight, maxLight) +
+        getPartialScore(currentMoisture, maxMoisture)) /
+      4 *
+      100
     );
+  }
+
+  const healthScore = Math.round(calculateScore());
+
+  function renderSegmentView() {
+    if (segmentViewId === 1) {
+      return (
+        <div className="flex flex-col gap-2">
+          <ProgressCard
+            category="Temperature"
+            srcIcon={humidity}
+            currentVal={currentTemp}
+            maxVal={maxTemp}
+          />
+          <ProgressCard
+            category="Humidity"
+            srcIcon={humidity}
+            currentVal={currentHumidity}
+            maxVal={maxHumidity}
+          />
+          <ProgressCard
+            category="Light"
+            srcIcon={humidity}
+            currentVal={currentLight}
+            maxVal={maxLight}
+          />
+          <ProgressCard
+            category="Moisture"
+            srcIcon={humidity}
+            currentVal={currentMoisture}
+            maxVal={maxMoisture}
+          />
+        </div>
+      );
+    } else if (segmentViewId === 2) {
+      return (plant &&
+        <div>
+          {plant.tasks.length === 0
+            ? "No tasks!"
+            : plant.tasks.map(task => (
+                <div key={task.id}>{task.message}</div>
+              ))}
+        </div>
+      );
+    } else {
+      return <>Gallery coming soon</>;
+    }
+  }
+
+  return (
+    <div className="grid grid-cols-1 grid-rows-10 p-4 tan_background">
+      <div
+        className="flex flex-row items-center"
+        onClick={() => navigate("/gallery")}
+      >
+        <img
+          src={arrow}
+          style={{ width: "8px", transform: "rotate(180deg)" }}
+        />
+        <p className="m-0 nav_text">Garden</p>
+      </div>
+
+      <PlantShelf />
+
+      <div className="flex justify-between m-2">
+        <div>
+          <h1 className="gamja-flower mb-0">{plant.name}</h1>
+          <p className="mb-0 text-start">{plant.plantType}</p>
+        </div>
+
+        <HealthScoreHeart score={healthScore} />
+      </div>
+
+      <div className="flex justify-around p-2">
+        <div onClick={() => setSegmentViewId(1)}>
+          <p className={segmentViewId === 1 ? "underline" : ""}>Details</p>
+        </div>
+        <div onClick={() => setSegmentViewId(2)}>
+          <p className={segmentViewId === 2 ? "underline" : ""}>
+            Recommended Tasks
+          </p>
+        </div>
+        <div onClick={() => setSegmentViewId(3)}>
+          <p className={segmentViewId === 3 ? "underline" : ""}>Gallery</p>
+        </div>
+      </div>
+
+      <div className="scroll-container">{renderSegmentView()}</div>
+    </div>
+  );
 }
 
 export default SinglePlantView;

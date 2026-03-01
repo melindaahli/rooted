@@ -27,7 +27,7 @@ function App() {
           <nav>
             <Link to="/dashboard">Dashboard</Link> | {" "}
             <Link to="/gallery">Gallery</Link> | {" "}
-            <Link to="/single-plant">Single Plant</Link> {" "}
+            <Link to="/plant/1">Single Plant</Link> | {" "}
             <Link to="/add-plant">Add Plant</Link> 
           </nav>
 
@@ -35,8 +35,8 @@ function App() {
           <Routes>
             <Route path="/dashboard" element={<DashboardView />} />
             <Route path="/gallery" element={<GalleryView />} /> 
-            <Route path="/single-plant" element={<SinglePlantView />} />
             <Route path="/add-plant" element={<AddPlant />} />
+            <Route path="/plant/:plantId" element={<SinglePlantView />} />
           </Routes>
       </div>
 
