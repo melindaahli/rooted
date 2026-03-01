@@ -73,8 +73,12 @@ p {
   padding-top: 20px;
 }
 
-.plant-scroll::-webkit-scrollbar {
+.plant_scroll::-webkit-scrollbar {
   display: none;
+}
+
+.plant_scroll {
+  scrollbar-width: none;
 }
 
 .add_plant {

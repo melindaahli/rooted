@@ -24,11 +24,13 @@ function DashboardView() {
 
     return (
     <div className="blue_background">
-        <div className="h-81">
-            <p className="text-[25px] text-left pt-6.25 pl-7.5">welcome back, shart</p>
+        <div className="h-50">
+            <p className="text-[25px] text-left pt-6.25 pl-7.5">welcome back, <br />
+                <span className="font-bold text-4xl m-0"> shart</span>
+            </p>
         </div>
-        <div className="flex justify-end -mb-1 mr-4">
-             <img src={Plant} className="w-25"/>
+        <div className="flex justify-end -my-1 mr-12 gap-2">
+             <img src={Plant} className="w-27"/>
         </div>
        
         <div className="tan-card-dashboard">
