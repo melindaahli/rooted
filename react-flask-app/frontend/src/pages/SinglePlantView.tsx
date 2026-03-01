@@ -31,7 +31,7 @@ function SinglePlantView() {
         } else {
             return <>gallery</>;
         }
-    }p
+    }
 
     return (
     <div className="grid grid-cols-1 grid-rows-10 p-4 tan_background no-flex">
