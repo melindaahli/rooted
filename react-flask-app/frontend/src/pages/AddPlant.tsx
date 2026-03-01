@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import arrow from "../assets/nocircle_arrow.svg";
-import favicon from "../assets/favicon.svg";
+import favicon from "/favicon.svg";
 
 function AddPlant() {
   const [plantName, setPlantName] = useState("");
