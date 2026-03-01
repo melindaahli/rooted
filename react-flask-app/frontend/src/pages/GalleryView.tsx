@@ -14,7 +14,7 @@ function GalleryView() {
             <p className="m-0">Garden</p>
         </div> */}
 
-        <div className="nav" onClick={() => { navigate("/gallery")}}>
+        <div className="nav" onClick={() => { navigate("/dashboard")}}>
             <img src={arrow} style={{ width: '8px', height: 'auto', transform: 'rotate(180deg)' }} />
             <p className="nav_text mb-0">Dashboard</p>
         </div>

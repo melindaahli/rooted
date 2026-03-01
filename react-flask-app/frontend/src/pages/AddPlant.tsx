@@ -17,7 +17,7 @@ function AddPlant() {
 
   return (
     <div className="blue_background">
-      <div className="nav" onClick={() => navigate("/gallery")}>
+      <div className="nav" onClick={() => navigate("/dashboard")}>
         <img src={arrow} style={{ width: '8px', height: 'auto', transform: 'rotate(180deg)' }} />
         <p className="nav_text m-0">Dashboard</p>
       </div>
