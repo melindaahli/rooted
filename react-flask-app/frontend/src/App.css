@@ -442,7 +442,7 @@ p {
   display: flex;
   height: 80%;
   width: 100%;
-  gap: 5px;
+  gap: 7px;
   white-space: nowrap;
   overflow-x: scroll;
   overflow-y: hidden;
